@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-# Create your views here.
-
+from .models import User
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    users = User.objects.order_by('-pub_date')
+    context = {'users': users}
+    return render(request, 'page/index.html', context)
 
-# def index(request):
-#
-#     return render(request, 'page/index.html')
+
+def add_user(request, user_id):
+    pass
