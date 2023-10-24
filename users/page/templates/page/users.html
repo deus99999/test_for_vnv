@@ -1,6 +1,6 @@
 {% extends './base.html' %}
 {% load static %}
-{% block title %} Users {% endblock %}
+{% block title %} {{ title }}  {% endblock %}
 	
 {% block content %}
 <ul class="nav justify-content-end">
@@ -25,7 +25,7 @@
 		      <td>{{ user.created }}</td>
 		      <td>{{ user.group }}</td>
 		      <td>
-		      	<button type="button" class="btn btn-outline-dark">Edit User</button>
+		      	<a href="{% url 'update_user' user.username %}" type="button" class="btn btn-outline-dark">Edit</a>
 		      	<a href="{% url 'delete_user' user.username %}" type="button" class="btn btn-outline-dark">Delete</a>
 		  	  </td>
 		    </tr>
