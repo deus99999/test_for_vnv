@@ -19,20 +19,24 @@
 		    </tr>
 		  </thead>
 		  <tbody>
+		  	{% for user in users %}
 		    <tr>
-		      <td>Otto</td>
-		      <td>23.10.2023</td>
-		      <td>Admin</td>
+		      <td>{{ user.username }}</td>
+		      <td>{{ user.created }}</td>
+		      <td>{{ user.group }}</td>
 		      <td>
 		      	<button type="button" class="btn btn-outline-dark">Edit User</button>
-		      	<button type="button" class="btn btn-outline-secondary">Delete</button>
+		      	<a href="{% url 'delete_user' user.username %}" type="button" class="btn btn-outline-dark">Delete</a>
 		  	  </td>
 		    </tr>
+		    {% endfor %}
 		  </tbody>
 		</table>
     </div>
 </div>
+
 {% endblock content %}
-		
+
+
 	
 

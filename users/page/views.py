@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import User, Group
-from .forms import CreateUser
+from .forms import CreateUser, CreateGroup
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import Http404
 
 
 def users(request):
@@ -19,19 +20,36 @@ def groups(request):
 
 def add_user(request):
     groups = Group.objects.all()
-    error = ''
     if request.method == 'POST':
         form = CreateUser(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
             form.save()
-            print('saved')
             return redirect('users')
-        if request.method == 'GET':
-            error = "Form is incorrect."
     else:
         form = CreateUser()
-    context = {'form': form, 'error': error, 'groups': groups}
+    context = {'form': form, 'groups': groups}
     return render(request, 'page/add_user.html', context)
 
 
+def delete_user(request, username):
+    # if request.method == 'POST':
+    try:
+        User.objects.filter(username=username).delete()
+        return redirect('users')
+    except User.DoesNotExist:
+        raise Http404("User does not exist")
+
+
+def add_group(request):
+    groups = Group.objects.all()
+    if request.method == 'POST':
+        form = CreateGroup(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.save()
+            return redirect('groups')
+    else:
+        form = CreateGroup()
+    context = {'form': form, 'groups': groups}
+    return render(request, 'page/add_user.html', context)

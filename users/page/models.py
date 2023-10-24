@@ -4,6 +4,7 @@ from django.utils import timezone
 
 class Group(models.Model):
     title = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=False, max_length=1000)
 
     def __repr__(self):
         return self.title
@@ -13,6 +14,7 @@ class Group(models.Model):
 
 
 class User(models.Model):
+    id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=100)
     email = models.EmailField(blank=True)
     created = models.DateField(default=timezone.now)
