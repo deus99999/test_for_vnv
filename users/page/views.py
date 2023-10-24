@@ -17,17 +17,21 @@ def groups(request):
     return render(request, 'page/groups.html', context)
 
 
-def add_user(request, user_id):
+def add_user(request):
+    groups = Group.objects.all()
+    error = ''
     if request.method == 'POST':
         form = CreateUser(request.POST)
-        print(form)
         if form.is_valid():
             form = form.save(commit=False)
             form.save()
-            return redirect('index')
+            print('saved')
+            return redirect('users')
         if request.method == 'GET':
             error = "Form is incorrect."
     else:
         form = CreateUser()
-    context = {'forms': form, 'error': error}
+    context = {'form': form, 'error': error, 'groups': groups}
     return render(request, 'page/add_user.html', context)
+
+

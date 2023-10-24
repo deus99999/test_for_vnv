@@ -4,7 +4,7 @@
 	
 {% block content %}
 <ul class="nav justify-content-end">
-	<a href="add_user.html" style="margin: 20px;" class="btn btn-outline-primary">Add User</a>
+	<a href="{% url 'add_user' %}" style="margin: 20px;" class="btn btn-outline-primary">Add User</a>
 </ul>
 
 <div class="row justify-content-center">
@@ -15,7 +15,6 @@
 		      <th scope="col">Name</th>
 		      <th scope="col">Created</th>
 		      <th scope="col">Group</th>
-		      <!-- <th scope="col">Admin</th> -->
 		      <th scope="col">Actions</th>
 		    </tr>
 		  </thead>
