@@ -34,5 +34,11 @@
 		  </tbody>
 		</table>
 	</div>
+
+	{% if warning %}
+	<div class=" text-center m-3">
+		<p>{{ warning }}</p>
+	</div>
+	{% endif %}
 </div>
 {% endblock content %}

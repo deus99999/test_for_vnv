@@ -89,6 +89,7 @@ def delete_group(request, group_id):
         group.delete()
         return redirect('groups')
     else:
-        raise Http404(f'There are users in the {group} group.')
-    context = {'groups': groups}
+        #raise Http404(f'There are users in the {group} group.')
+        warning = "You can not delete this group because it has users."
+    context = {'groups': groups, 'warning': warning}
     return render(request, 'page/groups.html', context)
