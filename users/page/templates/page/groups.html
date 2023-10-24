@@ -24,7 +24,7 @@
 		    <tr>
 		      <th scope="row">{{ group.id }}</th>
 		      <td>{{ group.title }}</td>
-		      <td>{{group.description|truncatewords:3 }}</td>
+		      <td>{{ group.description|truncatewords:3 }}</td>
 		      <td>
 		      	<a href="{% url 'update_group' group.title %}" type="button" class="btn btn-outline-dark">Edit</a>
 		        <a href="{% url 'delete_group' group.id %}" type="button" class="btn btn-outline-dark">Delete</a>

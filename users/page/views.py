@@ -82,13 +82,13 @@ def update_group(request, title):
 
 def delete_group(request, group_id):
     """can delete group only if there are no users in this group"""
-    users_of_group = User.objects.filter(group_id=group_id)
-    if users_of_group:
-        try:
-            Group.objects.filter(id=group_id).delete()
-            return redirect('groups')
-        except Group.DoesNotExist:
-            raise Http404("Group does not exist")
+    groups = Group.objects.all()
+    group = Group.objects.get(pk=group_id)
+    users_in_group = group.user_set.all()
+    if not users_in_group:
+        group.delete()
+        return redirect('groups')
     else:
-        return render(request, 'page/add_group.html')
-
+        raise Http404(f'There are users in the {group} group.')
+    context = {'groups': groups}
+    return render(request, 'page/groups.html', context)
